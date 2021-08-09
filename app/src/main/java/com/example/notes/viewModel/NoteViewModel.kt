@@ -1,12 +1,15 @@
 package com.example.notes.viewModel
 
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.notes.repository.NoteRepository
 import com.example.notes.room.Note
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.lang.Error
 
 class NoteViewModel(private val noteRepository: NoteRepository): ViewModel(){
@@ -29,5 +32,14 @@ class NoteViewModel(private val noteRepository: NoteRepository): ViewModel(){
 
     }
 
+      fun searchNote(searchQuery: String) {
+          viewModelScope.launch {
+              noteRepository.search(searchQuery)
+          }
 
-}
+     }
+
+
+
+    }
+

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
@@ -15,9 +16,8 @@ import com.example.notes.databinding.FragmentMenuBinding
 import com.example.notes.viewModel.NoteFactory
 import com.example.notes.viewModel.NoteRecycleView
 import com.example.notes.viewModel.NoteViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class FragmentMenu: Fragment() {
+class FragmentMenu: Fragment(), SearchView.OnQueryTextListener {
 
     private val factory by lazy {
         val application = requireActivity().application as NoteApplication
@@ -71,5 +71,21 @@ class FragmentMenu: Fragment() {
         }
 
 
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean {
+        if(query != null){
+            searchNote(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(query:String?): Boolean {
+        return true
+    }
+
+
+    private fun searchNote(query: String){
+        noteViewModel.searchNote(query)
     }
 }

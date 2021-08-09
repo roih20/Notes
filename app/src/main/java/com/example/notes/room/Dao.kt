@@ -19,7 +19,7 @@ interface Dao {
 
     // Function for search the title note
     @Query("SELECT * FROM Note_table WHERE title=:query")
-    suspend fun search(query: String): Note
+    suspend fun search(query: String): List<Note>
 
 
 
